@@ -3,82 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>English Learning Hub</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .video-bg {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;    
+            height: 100vh;   
+            object-fit: cover; 
+            z-index: -1;     
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.15); 
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700; 
+            font-size: 24px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: rgba(30, 41, 59, 0.85);
+            box-shadow: 0 0 30px #A855F7;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container h4 {
+            color: rgb(180, 180, 180);
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wrapper {
+            margin-bottom: 15px;
+        }
+
+        .wrapper a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper a:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: #A855F7;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .wrapper h2 {
+            font-size: 22px;
+            color: #00f5ff;
+            margin-bottom: 5px;
+        }
+
+        .wrapper h4 {
+            font-weight: normal;
+            color: #ffffff;
+            margin: 0;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar h1 {
+                font-size: 18px;
+            }
+            .container {
+                width: 90%;
+                margin: 20px auto;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-<style>
-    .video-bg {
-    position: fixed; /* Mengunci video agar tidak ikut bergerak saat di-scroll */
-    top: 0;
-    left: 0;
-    width: 100vw;    /* Memaksa lebar penuh sesuai layar browser */
-    height: 100vh;   /* Memaksa tinggi penuh sesuai layar browser */
-    object-fit: cover; /* Agar video tidak gepeng/terdistorsi */
-    z-index: -1;     /* Angka minus memastikan posisi video berada di paling belakang baju halaman */
-    }
-    .navbar{
-    background-color: #A855F7;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-style:normal;
-    font-weight: bold;
- /* 1. Warna dasar putih yang super transparan */
-    background-color: rgba(255, 255, 255, 0.15); 
-    /* 2. Efek blur buat ngasih tekstur "kaca bening" */
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); /* Khusus buat browser Safari */
-    /* 3. Opsional: Kasih border tipis biar makin tegas bentuk kacanya */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    /* 4. Opsional: Kasih shadow halus biar efeknya makin timbul */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    }
-    .container {
-    width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #1E293B;
-    box-shadow: 0 0 30px#A855F7;
-    border-radius: 15px;
-    font-family: 'Consolas', 'Lucida Console', monospace;
-    }
-    .wrapper a{
-    color: #ffffff !important;
-    text-decoration: none;
-    border-radius:8px ;
-    font-weight: bold;
-    }
-    .container h2,h4{
-        text-align: left;
-    }
-    .navbar h1{
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700; 
-        letter-spacing: -0.5px;
-        color: rgb(255, 255, 255);
-    }
-</style>
-<body >
-    <div>
+<body>
+
     <nav class="navbar">
-        <div>
-            <h1>Welcome to the English learning website</h1>
-        </div>
-    </div>
+        <h1>Welcome to the English learning website</h1>
+    </nav>
     
     <div class="container">
-        <h4 style="color: rgb(144, 143, 143);">3 main materials:</h4>
+        <h4>3 main materials:</h4>
+        
         <div class="wrapper">
-            <center><a href="EAP.html"><h2>1.EAP</h2><h4>English for Academic Purposes</h4></a></center>
+            <a href="EAP.html">
+                <h2>1. EAP</h2>
+                <h4>English for Academic Purposes</h4>
+            </a>
         </div>
+        
         <div class="wrapper">
-            <center><a href="pc.html"><h2>2.PC</h2><h4>Professional Communication</h4></a></center>
+            <a href="pc.html">
+                <h2>2. PC</h2>
+                <h4>Professional Communication</h4>
+            </a>
         </div>
+        
         <div class="wrapper">
-            <center><a href="ps.html"><h2>3.PS</h2><h4>Public Speaking & Presentation Skills</h4></a></center>
+            <a href="ps.html">
+                <h2>3. PS</h2>
+                <h4>Public Speaking & Presentation Skills</h4>
+            </a>
         </div>
     </div>
+
     <video autoplay muted loop class="video-bg">
         <source src="WhatsApp Video 2026-05-24 at 13.43.46.mp4">
+    </video>
+    
 </body>
 </html>
-

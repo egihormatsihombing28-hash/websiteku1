@@ -3,138 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Professional Communication</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .video-bg {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;    
+            height: 100vh;   
+            object-fit: cover; 
+            z-index: -1;     
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.15); 
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar h1 {
+            font-size: 20px;
+        }
+
+        .navbar ul {
+            list-style: none;
+        }
+
+        .menu-game {
+            display: inline-block;
+            border: 1px solid rgba(0, 245, 255, 0.4); 
+            padding: 8px 16px;                        
+            border-radius: 8px;                       
+            background: rgba(0, 245, 255, 0.05);      
+            transition: 0.3s;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .menu-game:hover {
+            background: rgba(0, 245, 255, 0.2);
+            border-color: #00f5ff;
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        }
+
+        .wrapper-content {
+            display: flex;
+            justify-content: center; 
+            align-items: flex-start; 
+            gap: 25px;               
+            margin: 40px auto;        
+            padding: 0 20px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .container {
+            padding: 30px; 
+            box-shadow: 0 0 30px #010101;
+            border-radius: 15px;
+            width: 50%; 
+            min-height: 400px; 
+            backdrop-filter: blur(12px);
+            background-color: rgba(30, 41, 59, 0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .container h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .container h4, .container p, .container ul {
+            font-weight: normal;
+            line-height: 1.6; 
+            font-size: 15px;
+        }
+
+        .rules-list {
+            list-style-position: inside;
+            margin-top: 15px;
+        }
+
+        .rules-list li {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .wrapper-content {
+                flex-direction: column;
+                align-items: center;
+                margin: 20px auto;
+            }
+
+            .container {
+                width: 100%;
+                min-height: auto;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-<style>
-.video-bg {
-    position: fixed; /* Mengunci video agar tidak ikut bergerak saat di-scroll */
-    top: 0;
-    left: 0;
-    width: 100vw;    /* Memaksa lebar penuh sesuai layar browser */
-    height: 100vh;   /* Memaksa tinggi penuh sesuai layar browser */
-    object-fit: cover; /* Agar video tidak gepeng/terdistorsi */
-    z-index: -1;     /* Angka minus memastikan posisi video berada di paling belakang baju halaman */
-}
-.navbar{
-    background-color: #A855F7;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-style:normal;
-    font-weight: bold;
- /* 1. Warna dasar putih yang super transparan */
-    background-color: rgba(255, 255, 255, 0.15); 
-    
-    /* 2. Efek blur buat ngasih tekstur "kaca bening" */
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); /* Khusus buat browser Safari */
-    
-    /* 3. Opsional: Kasih border tipis biar makin tegas bentuk kacanya */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    /* 4. Opsional: Kasih shadow halus biar efeknya makin timbul */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    font-family: Arial, Helvetica, sans-serif;
-
-    }
-    .wrapper-content {
-    display: flex;
-    justify-content: center; /* Membuat kedua kotak berada di tengah halaman */
-    align-items: flex-start; /* Mengunci bagian atas kedua kotak agar setara/sejajar lurus */
-    gap: 30px;               /* Memberikan jarak renggang di antara kedua kotak */
-    margin-top: 50px;        /* Jarak antara navbar dengan kotak materi */
-}
-.container{
-    padding: 40px; /* Sedikit dikecilkan agar teks panjangmu tidak terlalu sesak */
-    box-shadow: 0 0 30px #010101;
-    border-radius: 15px;
-    width: 350px;  /* Sedikit diperlebar menjadi 350px supaya teks EAP terbaca rapi */
-    height: 350px; /* Disesuaikan tingginya agar muat penjelasannya */
-    backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    overflow-y: auto;
-    font-family: Arial, Helvetica, sans-serif;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi efek membesar */
-}
-/* Efek interaktif hover & active untuk kedua container */
-.container:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
-}
-
-.container:active {
-    transform: scale(1.05);
-}
-
-/* Reset margin bawaan tag judul di dalam container agar merapat ke atas */
-.container h2, .container2 h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-.container h4, .container2 h4 {
-    margin-top: 0;
-    font-weight: normal;
-    line-height: 1.6; /* Membuat jarak antar baris teks lebih nyaman dibaca */
-}
-.menu-game {
-    border: 1px solid rgba(0, 245, 255, 0.4); /* Garis kotak tipis warna cyan */
-    padding: 6px 12px;                        /* Jarak teks ke garis (atas-bawah, kiri-kanan) */
-    border-radius: 8px;                       /* Membuat sudut kotak agak bulat */
-    background: rgba(0, 245, 255, 0.05);      /* Warna latar tipis di dalam kotak */
-    transition: 0.3s;
-}
-
-/* Efek saat kursor menyentuh kotak */
-.menu-game:hover {
-    background: rgba(0, 245, 255, 0.2);
-    border-color: #00f5ff;
-    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
-}
-</style>
 <body>
-    <div>
+
     <nav class="navbar">
         <div>
-            <h1 style="color: white;">Professional Communication</h1></div>
-            <ul>
-                <li>
-                    <a href="game2.html" class="menu-game" style="color: white;">🎮 Main Game</a>
-                </li>
-            </ul>
-        
-    </div>
+            <h1 style="color: white;">Professional Communication</h1>
+        </div>
+        <ul>
+            <li>
+                <a href="game2.html" class="menu-game">🎮 Main Game</a>
+            </li>
+        </ul>
+    </nav>
+
     <div class="wrapper-content">
         <div class="container">
             <h2 style="color: white;">Definition</h2>
-            <h4 style="color: rgb(0, 255, 30);">Professional Communication  is the practice of exchanging information
-                efficiently and politely within a business or 
-                corporate environment. Unlike casual talking, PC focuses on clear, respectful, 
-                and goal-oriented communication to build trust with colleagues, managers, and clients.</h4>
+            <h4 style="color: rgb(0, 255, 30);">
+                Professional Communication is the practice of exchanging information efficiently and politely within a business or corporate environment. Unlike casual talking, PC focuses on clear, respectful, and goal-oriented communication to build trust with colleagues, managers, and clients.
+            </h4>
         </div>
     
-    <div class="container">
-        <div class="wrapper">
+        <div class="container">
             <h2 style="color: white;">Core Rules</h2>
-            <ul class="rules-list" style="color:rgb(0, 255, 30) ;">
+            <ul class="rules-list" style="color:rgb(0, 255, 30);">
                 <li>
-                    <strong>1.Be Clear and Concise</strong>
+                    <strong>1. Be Clear and Concise</strong>
                     <p>Get straight to the point. Avoid long, confusing explanations so that the readers can understand your message instantly without wasting time.</p>
                 </li>
                 <li>
-                    <strong>2.Maintain Professional Politeness</strong>
+                    <strong>2. Maintain Professional Politeness</strong>
                     <p>Always use respectful greetings and a positive tone, even when you are delivering bad news or handling a complaint from a client.</p>
                 </li>
                 <li>
-                    <strong>3.Know Your Audience</strong>
+                    <strong>3. Know Your Audience</strong>
                     <p>Adjust your vocabulary depending on who you are talking to. Speaking to your company's CEO or a formal client requires a different approach than chatting with a close teammate.</p>
                 </li>
             </ul>
-            
         </div>
     </div>
+
     <video autoplay muted loop class="video-bg">
         <source src="WhatsApp Video 2026-05-24 at 13.43.46.mp4">
+    </video>
     
 </body>
 </html>

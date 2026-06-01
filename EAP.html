@@ -3,109 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>English for Academic Purposes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .video-bg {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;    
+            height: 100vh;   
+            object-fit: cover; 
+            z-index: -1;     
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.15); 
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar h1 {
+            font-size: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700; 
+            color: rgb(255, 255, 255);
+        }
+
+        .game {
+            list-style: none;
+        }
+
+        .menu-game {
+            display: inline-block;
+            border: 1px solid rgba(0, 245, 255, 0.4); 
+            padding: 8px 16px;                        
+            border-radius: 8px;                       
+            background: rgba(0, 245, 255, 0.05);      
+            transition: 0.3s;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .menu-game:hover {
+            background: rgba(0, 245, 255, 0.2);
+            border-color: #00f5ff;
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        }
+
+        .wrapper-content {
+            display: flex;
+            justify-content: center; 
+            align-items: flex-start; 
+            gap: 25px;               
+            margin: 40px auto;        
+            padding: 0 20px;
+            width: 100%;
+            max-width: 900px; 
+            position: relative;
+            z-index: 5;
+        }
+
+        .container {
+            padding: 30px; 
+            box-shadow: 0 0 30px #010101;
+            border-radius: 15px;
+            width: 50%; 
+            min-height: 400px; 
+            backdrop-filter: blur(12px);
+            background-color: rgba(30, 41, 59, 0.8); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+
+        .container h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .container h4, .container p, .container ul {
+            font-weight: normal;
+            line-height: 1.6; 
+            font-size: 15px;
+        }
+
+        .rules-list {
+            list-style-position: inside;
+            margin-top: 15px;
+        }
+
+        .rules-list li {
+            margin-bottom: 15px;
+        }
+
+        .example-tag {
+            display: block;
+            margin-top: 3px;
+            padding-left: 15px;
+            font-style: italic;
+            color: #ff006e; 
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; 
+                text-align: center;
+                gap: 12px;
+            }
+
+            .navbar h1 {
+                font-size: 18px;
+            }
+
+            .wrapper-content {
+                flex-direction: column; 
+                align-items: center;
+                margin: 20px auto;
+            }
+
+            .container {
+                width: 100%; 
+                min-height: auto; 
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-<style>
-.video-bg {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100vw;    
-    height: 100vh;   
-    object-fit: cover; 
-    z-index: -1;     
-}
-
-.navbar {
-    background-color: #A855F7;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-style: normal;
-    font-weight: bold;
-    background-color: rgba(255, 255, 255, 0.15); 
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px); 
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* --- KUNCI UTAMA DI SINI --- */
-/* Kita ubah .wrapper menjadi area Flexbox untuk memeluk container 1 dan 2 */
-.wrapper-content {
-    display: flex;
-    justify-content: center; /* Membuat kedua kotak berada di tengah halaman */
-    align-items: flex-start; /* Mengunci bagian atas kedua kotak agar setara/sejajar lurus */
-    gap: 30px;               /* Memberikan jarak renggang di antara kedua kotak */
-    margin-top: 50px;        /* Jarak antara navbar dengan kotak materi */
-}
-
-.container {
-    padding: 40px; /* Sedikit dikecilkan agar teks panjangmu tidak terlalu sesak */
-    box-shadow: 0 0 30px #010101;
-    border-radius: 15px;
-    width: 350px;  /* Sedikit diperlebar menjadi 350px supaya teks EAP terbaca rapi */
-    height: 350px; /* Disesuaikan tingginya agar muat penjelasannya */
-    backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    overflow-y: auto;
-    font-family: Arial, Helvetica, sans-serif;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi efek membesar */
-}
-
-/* Efek interaktif hover & active untuk kedua container */
-.container:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
-}
-
-.container:active {
-    transform: scale(1.05);
-}
-
-/* Reset margin bawaan tag judul di dalam container agar merapat ke atas */
-.container h2, .container2 h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-.container h4, .container2 h4 {
-    margin-top: 0;
-    font-weight: normal;
-    line-height: 1.6; /* Membuat jarak antar baris teks lebih nyaman dibaca */
-}
-.menu-game {
-    border: 1px solid rgba(0, 245, 255, 0.4); /* Garis kotak tipis warna cyan */
-    padding: 6px 12px;                        /* Jarak teks ke garis (atas-bawah, kiri-kanan) */
-    border-radius: 8px;                       /* Membuat sudut kotak agak bulat */
-    background: rgba(0, 245, 255, 0.05);      /* Warna latar tipis di dalam kotak */
-    transition: 0.3s;
-}
-
-/* Efek saat kursor menyentuh kotak */
-.menu-game:hover {
-    background: rgba(0, 245, 255, 0.2);
-    border-color: #00f5ff;
-    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
-}
-</style>
 <body>
-    
-    <div>
-        <nav class="navbar">
-            <div><h1 style="color: white; margin: 0;">English for Academic Purposes</h1></div>
-            <ul class="game">
-                <li>
-                    <a href="game.html" class="menu-game" style="color: white;">🎮 Main Game</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <!-- KEDUA CONTAINER DIBUNGKUS DI SINI AGAR BISA SEJAJAR KE SAMPING -->
+
+    <nav class="navbar">
+        <div>
+            <h1>English for Academic Purposes</h1>
+        </div>
+        <ul class="game">
+            <li>
+                <a href="game.html" class="menu-game">🎮 Main Game</a>
+            </li>
+        </ul>
+    </nav>
+
     <div class="wrapper-content">
-        
-        <!-- CONTAINER 1: PENGERTIAN -->
         <div class="container">
             <h2 style="color: aliceblue;">WHAT IS EAP?</h2>
             <h4 style="color: rgb(0, 255, 30);">
@@ -116,37 +179,36 @@
                 understanding scientific journals, and delivering professional presentations using precise terminology.
             </h4>
         </div>
-        <!-- CONTAINER 2: ATURAN KUNCI -->
-<div class="container">
-    <div class="wrapper">
-        <h2 style="color: white;">Core Rules of EAP</h2>
-        <p class="intro-text" style="color: rgb(0, 255, 30)">To write professionally in an academic environment, you must follow these four fundamental rules:</p>
-        
-        <ul class="rules-list" style="color: rgb(0, 255, 30);">
-            <li>
-                <strong>1. Use Formal Tone</strong>
-                <p>Avoid using informal words, slang, or shortcuts. Every word must be written in its full form.</p>
-                <span class="example-tag">Example: Write <em>"do not"</em> instead of <em>"don't"</em>.</span>
-            </li>
-            <li>
-                <strong>2. Maintain Objectivity</strong>
-                <p>Focus entirely on facts, data, and evidence. Avoid using personal pronouns like "I", "We", or "In my opinion".</p>
-                <span class="example-tag">Example: Write <em>"The data shows..."</em> instead of <em>"I think..."</em>.</span>
-            </li>
-            <li>
-                <strong>3. Apply Hedging (Cautious Language)</strong>
-                <p>Do not make absolute claims unless they are 100% proven. Use cautious language to show academic humility.</p>
-                <span class="example-tag">Example: Use words like <em>"suggests"</em>, <em>"could"</em>, or <em>"may"</em>.</span>
-            </li>
-            <li>
-                <strong>4. Use Passive Voice</strong>
-                <p>Shift the focus from the person doing the action to the action itself to make the writing sound more scientific.</p>
-                <span class="example-tag">Example: Write <em>"The experiment was conducted"</em>.</span>
-            </li>
-        </ul>
+
+        <div class="container">
+            <h2 style="color: white;">Core Rules of EAP</h2>
+            <p class="intro-text" style="color: rgb(0, 255, 30)">To write professionally in an academic environment, you must follow these four fundamental rules:</p>
+            
+            <ul class="rules-list" style="color: rgb(0, 255, 30);">
+                <li>
+                    <strong>1. Use Formal Tone</strong>
+                    <p>Avoid using informal words, slang, or shortcuts. Every word must be written in its full form.</p>
+                    <span class="example-tag">Example: Write "do not" instead of "don't".</span>
+                </li>
+                <li>
+                    <strong>2. Maintain Objectivity</strong>
+                    <p>Focus entirely on facts, data, and evidence. Avoid using personal pronouns like "I", "We", or "In my opinion".</p>
+                    <span class="example-tag">Example: Write "The data shows..." instead of "I think...".</span>
+                </li>
+                <li>
+                    <strong>3. Apply Hedging (Cautious Language)</strong>
+                    <p>Do not make absolute claims unless they are 100% proven. Use cautious language to show academic humility.</p>
+                    <span class="example-tag">Example: Use words like "suggests", "could", or "may".</span>
+                </li>
+                <li>
+                    <strong>4. Use Passive Voice</strong>
+                    <p>Shift the focus from the person doing the action to the action itself to make the writing sound more scientific.</p>
+                    <span class="example-tag">Example: Write "The experiment was conducted".</span>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-    <!-- VIDEO BACKGROUND -->
+
     <video autoplay muted loop class="video-bg">
         <source src="WhatsApp Video 2026-05-24 at 13.43.46.mp4">
     </video>
