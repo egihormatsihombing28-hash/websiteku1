@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUIZ MASTER - PROFESSIONAL COMMUNICATION</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --cyan:#00f5ff;
+    --pink:#ff006e;
+    --yellow:#ffee00;
+    --green:#00ff88;
+    --dark:#050a1a;
+}
+
+body{
+    font-family:'Rajdhani',sans-serif;
+    background:var(--dark);
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow-x:hidden;
+}
+
+/* BACKGROUND */
+canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+.wrap{
+    position:relative;
+    z-index:10;
+    width:100%;
+    max-width:760px;
+    padding:20px;
+}
+
+.screen{
+    display:none;
+}
+
+.screen.active{
+    display:block;
+    animation:fade .5s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* INTRO */
+
+.card{
+    text-align:center;
+    background:rgba(0,245,255,.04);
+    border:1px solid rgba(0,245,255,.2);
+    border-radius:24px;
+    padding:55px 35px;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    inset:-2px;
+    background:linear-gradient(
+        90deg,
+        var(--cyan),
+        var(--pink),
+        var(--yellow),
+        var(--cyan)
+    );
+    background-size:300% 100%;
+    z-index:-1;
+    border-radius:26px;
+    animation:borderMove 3s linear infinite;
+}
+
+@keyframes borderMove{
+    0%{background-position:0%;}
+    100%{background-position:300%;}
+}
+
+.logo{
+    font-family:'Orbitron',sans-serif;
+    font-size:68px;
+    font-weight:900;
+    letter-spacing:5px;
+    background:linear-gradient(135deg,var(--cyan),var(--pink));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:glow 2s ease infinite;
+}
+
+.logo2{
+    font-family:'Orbitron',sans-serif;
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:5px;
+    background:linear-gradient(135deg,var(--pink),var(--yellow));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+@keyframes glow{
+    0%,100%{
+        filter:drop-shadow(0 0 20px rgba(0,245,255,.7));
+    }
+    50%{
+        filter:drop-shadow(0 0 35px rgba(255,0,110,.7));
+    }
+}
+
+.sub{
+    font-family:'Orbitron',sans-serif;
+    font-size:13px;
+    color:var(--yellow);
+    letter-spacing:5px;
+    margin:12px 0 35px;
+}
+
+.desc{
+    font-size:18px;
+    line-height:1.8;
+    color:rgba(255,255,255,.7);
+    margin-bottom:40px;
+}
+
+.desc b{
+    color:var(--cyan);
+}
+
+.btn-main{
+    font-family:'Orbitron',sans-serif;
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:3px;
+    padding:17px 50px;
+    border-radius:50px;
+    background:transparent;
+    border:2px solid var(--cyan);
+    color:var(--cyan);
+    cursor:pointer;
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.btn-main span{
+    position:absolute;
+    inset:0;
+    background:var(--cyan);
+    transform:translateX(-100%);
+    transition:.4s;
+    z-index:-1;
+}
+
+.btn-main:hover span{
+    transform:translateX(0);
+}
+
+.btn-main:hover{
+    color:black;
+    box-shadow:0 0 25px rgba(0,245,255,.5);
+}
+
+.btn-main:active{
+    transform:scale(.96);
+}
+
+/* COUNTDOWN */
+
+#cd{
+    position:fixed;
+    inset:0;
+    background:rgba(5,10,26,.94);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999;
+}
+
+#cd.on{
+    display:flex;
+}
+
+#cd-lbl{
+    font-family:'Orbitron',sans-serif;
+    letter-spacing:5px;
+    color:rgba(255,255,255,.5);
+    margin-bottom:10px;
+}
+
+#cd-n{
+    font-family:'Orbitron',sans-serif;
+    font-size:150px;
+    font-weight:900;
+    color:var(--cyan);
+}
+
+.pop{
+    animation:pop .9s ease;
+}
+
+@keyframes pop{
+    0%{
+        transform:scale(2);
+        opacity:0;
+    }
+    60%{
+        transform:scale(.9);
+        opacity:1;
+    }
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* QUIZ */
+
+.hud{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.tw{
+    position:relative;
+    width:74px;
+    height:74px;
+}
+
+.tw svg{
+    transform:rotate(-90deg);
+}
+
+.tbg{
+    stroke:rgba(255,255,255,.1);
+}
+
+.tfg{
+    stroke:var(--cyan);
+    stroke-linecap:round;
+    transition:1s linear;
+}
+
+.tn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-family:'Orbitron',sans-serif;
+    font-size:20px;
+    color:var(--cyan);
+}
+
+.sc{
+    font-family:'Orbitron',sans-serif;
+    font-size:12px;
+    color:rgba(255,255,255,.5);
+    text-align:right;
+}
+
+.sc span{
+    display:block;
+    font-size:28px;
+    color:var(--yellow);
+}
+
+.prog{
+    height:4px;
+    background:rgba(255,255,255,.1);
+    border-radius:3px;
+    overflow:hidden;
+    margin-bottom:20px;
+}
+
+.pf{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--cyan),var(--pink));
+    transition:.5s;
+}
+
+.qlbl{
+    display:inline-block;
+    font-family:'Orbitron',sans-serif;
+    font-size:11px;
+    color:var(--yellow);
+    letter-spacing:3px;
+    margin-bottom:15px;
+}
+
+.qbox{
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    padding:28px 24px;
+    margin-bottom:20px;
+}
+
+.qtxt{
+    font-size:22px;
+    font-weight:700;
+    line-height:1.6;
+}
+
+.opts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.opt{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:13px;
+    padding:16px 14px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    transition:.25s;
+    text-align:left;
+    overflow:hidden;
+    position:relative;
+    color:white;
+}
+
+.opt:hover:not(.locked){
+    border-color:var(--cyan);
+    transform:translateY(-2px) scale(1.01);
+    background:rgba(0,245,255,.08);
+}
+
+.ol{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.3);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Orbitron',sans-serif;
+    color:white;
+}
+
+.ot{
+    font-size:16px;
+    font-weight:600;
+    color:white;
+}
+
+.correct{
+    border-color:var(--green)!important;
+    background:rgba(0,255,136,.12)!important;
+}
+
+.correct .ol{
+    background:var(--green);
+    color:black;
+    border-color:var(--green);
+}
+
+.correct .ot{
+    color:#050a1a;
+}
+
+.wrong{
+    border-color:var(--pink)!important;
+    background:rgba(255,0,110,.12)!important;
+}
+
+.wrong .ol{
+    background:var(--pink);
+    border-color:var(--pink);
+    color:white;
+}
+
+.locked{
+    pointer-events:none;
+}
+
+.expl{
+    display:none;
+    margin-top:18px;
+    background:rgba(0,245,255,.05);
+    border:1px solid rgba(0,245,255,.15);
+    border-radius:12px;
+    padding:15px;
+    line-height:1.7;
+}
+
+.expl.on{
+    display:block;
+}
+
+.btn-next{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border-radius:50px;
+    border:2px solid var(--pink);
+    background:transparent;
+    color:var(--pink);
+    font-family:'Orbitron',sans-serif;
+    font-weight:700;
+    cursor:pointer;
+    display:none;
+}
+
+.btn-next.on{
+    display:block;
+}
+
+.btn-next:hover{
+    background:var(--pink);
+    color:white;
+}
+
+/* RESULT */
+
+.rc{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.rt{
+    font-size:85px;
+}
+
+.rtitle{
+    font-family:'Orbitron',sans-serif;
+    font-size:36px;
+    margin:10px 0;
+}
+
+.rval{
+    font-family:'Orbitron',sans-serif;
+    font-size:70px;
+    color:var(--yellow);
+}
+
+.rmsg{
+    margin:20px 0 30px;
+    color:rgba(255,255,255,.7);
+    font-size:18px;
+}
+
+.btn-replay{
+    padding:15px 40px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,var(--cyan),var(--pink));
+    color:white;
+    font-family:'Orbitron',sans-serif;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+    .opts{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        font-size:50px;
+    }
+
+    .logo2{
+        font-size:32px;
+    }
+
+    #cd-n{
+        font-size:100px;
+    }
+
+    .qtxt{
+        font-size:18px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<!-- COUNTDOWN -->
+<div id="cd">
+    <div id="cd-lbl"> READY?</div>
+    <div id="cd-n">3</div>
+</div>
+
+<div class="wrap">
+
+<!-- INTRO -->
+<div class="screen active" id="s-intro">
+
+<div class="card">
+
+<div class="logo">COMM</div>
+<div class="logo2">PROFESSIONAL</div>
+
+<div class="sub">⚡  PROFESSIONAL COMMUNICATION MODULE ⚡</div>
+
+<p class="desc">
+Test your workspace communication skills with <b>2 business case questions</b>!<br>
+Analyze workplace scenarios and choose the most effective response.<br>
+Each question has <b>15 seconds</b>.
+</p>
+
+<button class="btn-main" id="btn-start">
+<span></span>
+▶   START GAME
+</button>
+
+</div>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="s-quiz">
+
+<div class="hud">
+
+<div class="tw">
+
+<svg width="74" height="74">
+
+<circle class="tbg"
+cx="37"
+cy="37"
+r="31"
+fill="none"
+stroke-width="5"/>
+
+<circle class="tfg"
+id="tarc"
+cx="37"
+cy="37"
+r="31"
+fill="none"
+stroke-width="5"
+stroke-dasharray="194.8"
+stroke-dashoffset="0"/>
+
+</svg>
+
+<div class="tn" id="tnum">15</div>
+
+</div>
+
+<div class="sc">
+SKOR
+<span id="scnum">0</span>
+</div>
+
+</div>
+
+<div class="prog">
+<div class="pf" id="pf"></div>
+</div>
+
+<div class="qlbl" id="qlbl"></div>
+
+<div class="qbox">
+<p class="qtxt" id="qtxt"></p>
+</div>
+
+<div class="opts" id="opts"></div>
+
+<div class="expl" id="expl"></div>
+
+<button class="btn-next" id="btn-next">
+LANJUT →
+</button>
+
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="s-result">
+
+<div class="rc">
+
+<div class="rt" id="rtrophy">🏆</div>
+
+<div class="rtitle" id="rtitle">PERFECT!</div>
+
+<div class="rval" id="rval">0</div>
+
+<p class="rmsg" id="rmsg"></p>
+
+<button class="btn-replay" id="btn-replay">
+🔄 PLAY AGAIN
+</button>
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+/* KUNCI JAWABAN FIX: NOMOR 1 = D (index 3), NOMOR 2 = C (index 2) */
+
+const QS = [
+
+{
+q:"💼 You received a highly aggressive email from a client complaining about a small delay. What is the best professional communication practice?",
+opts:[
+    "Reply immediately with equal aggression", // Opsi A
+    "Ignore the email until next week", // Opsi B
+    "Cc all company managers to defend your position", // Opsi C
+    "Acknowledge their frustration calmly and offer a factual solution" // Opsi D (BENAR)
+],
+ans:3, // Index 3 berarti Opsi Ke-4 (D) adalah yang Benar
+expl:"Professional Communication requires emotional regulation. Answering calmly while prioritizing constructive solutions de-escalates conflict effectively."
+},
+
+{
+q:"📧 When writing an official business email to a critical corporate partner, how should you structure your closing remark?",
+opts:[
+    "'Catch you later, buddy'", // Opsi A
+    "Leave it blank to save time", // Opsi B
+    "'Best regards, followed by your name and formal signature'", // Opsi C (BENAR)
+    "'Sent from my mobile device'" // Opsi D
+],
+ans:2, // Index 2 berarti Opsi Ke-3 (C) adalah yang Benar
+expl:"A formal complimentary close (e.g., 'Best regards') combined with a professional corporate signature is standard protocol to preserve company credibility."
+}
+
+];
+
+/* STATE */
+
+let cur = 0;
+let score = 0;
+let answered = false;
+let timerID = null;
+let timeLeft = 15;
+
+/* HELPER */
+
+function g(id){
+    return document.getElementById(id);
+}
+
+function showScreen(id){
+
+    document.querySelectorAll('.screen')
+    .forEach(s=>s.classList.remove('active'));
+
+    g(id).classList.add('active');
+}
+
+/* STAR BACKGROUND */
+
+const cv = g('bg');
+const cx = cv.getContext('2d');
+
+let stars = [];
+
+function initStars(){
+
+    cv.width = window.innerWidth * devicePixelRatio;
+    cv.height = window.innerHeight * devicePixelRatio;
+
+    cx.scale(devicePixelRatio,devicePixelRatio);
+
+    stars = [];
+
+    for(let i=0;i<160;i++){
+
+        stars.push({
+
+            x:Math.random()*window.innerWidth,
+            y:Math.random()*window.innerHeight,
+            r:Math.random()*1.5,
+            sp:Math.random()*0.3
+
+        });
+    }
+}
+
+function drawStars(){
+
+    cx.clearRect(0,0,window.innerWidth,window.innerHeight);
+
+    stars.forEach(s=>{
+
+        cx.beginPath();
+
+        cx.arc(s.x,s.y,s.r,0,Math.PI*2);
+
+        cx.fillStyle='rgba(255,255,255,.8)';
+        cx.fill();
+
+        s.y += s.sp;
+
+        if(s.y > window.innerHeight){
+            s.y = 0;
+        }
+
+    });
+
+    requestAnimationFrame(drawStars);
+}
+
+initStars();
+drawStars();
+
+window.addEventListener('resize',initStars);
+
+/* COUNTDOWN */
+
+function startCountdown(){
+
+    const overlay = g('cd');
+    const num = g('cd-n');
+
+    overlay.classList.add('on');
+
+    const seq = ['3','2','1','GO!'];
+
+    let idx = 0;
+
+    num.textContent = seq[0];
+
+    const iv = setInterval(()=>{
+
+        idx++;
+
+        if(idx >= seq.length){
+
+            clearInterval(iv);
+
+            overlay.classList.remove('on');
+
+            showScreen('s-quiz');
+
+            loadQ();
+
+            return;
+        }
+
+        num.classList.remove('pop');
+
+        setTimeout(()=>{
+            num.classList.add('pop');
+        },10);
+
+        num.textContent = seq[idx];
+
+    },1000);
+}
+
+/* LOAD QUESTION */
+
+function loadQ(){
+
+    answered = false;
+
+    timeLeft = 15;
+
+    const q = QS[cur];
+
+    g('qtxt').textContent = q.q;
+
+    g('qlbl').textContent =
+    `PERTANYAAN ${cur+1} / ${QS.length}`;
+
+    g('pf').style.width =
+    ((cur+1)/QS.length*100)+'%';
+
+    g('expl').className='expl';
+
+    g('btn-next').className='btn-next';
+
+    const letters = ['A','B','C','D'];
+
+    const grid = g('opts');
+
+    grid.innerHTML='';
+
+    q.opts.forEach((op,index)=>{
+
+        const btn = document.createElement('button');
+
+        btn.type='button';
+
+        btn.className='opt';
+
+        btn.innerHTML=`
+        <div class="ol">${letters[index]}</div>
+        <div class="ot">${op}</div>
+        `;
+
+        btn.addEventListener('click',(e)=>{
+
+            handlePick(index,btn,e);
+
+        });
+
+        grid.appendChild(btn);
+
+    });
+
+    startTimer();
+}
+
+/* TIMER */
+
+function startTimer(){
+
+    clearInterval(timerID);
+
+    updateTimerUI();
+
+    timerID = setInterval(()=>{
+
+        timeLeft--;
+
+        updateTimerUI();
+
+        if(timeLeft <= 0){
+
+            clearInterval(timerID);
+
+            handleTimeUp();
+        }
+
+    },1000);
+}
+
+function updateTimerUI(){
+
+    g('tnum').textContent = timeLeft;
+
+    const arc = g('tarc');
+
+    const circ = 194.8;
+
+    arc.style.strokeDashoffset =
+    circ * (1 - timeLeft/15);
+
+    if(timeLeft <= 5){
+
+        arc.style.stroke='var(--pink)';
+        g('tnum').style.color='var(--pink)';
+
+    }else{
+
+        arc.style.stroke='var(--cyan)';
+        g('tnum').style.color='var(--cyan)';
+
+    }
+}
+
+/* TIME UP */
+
+function handleTimeUp(){
+
+    answered = true;
+
+    lockAll();
+
+    markCorrect();
+
+    showExpl();
+}
+
+/* PICK */
+
+function handlePick(idx,btn,e){
+
+    if(answered) return;
+
+    answered = true;
+
+    btn.disabled = true;
+
+    clearInterval(timerID);
+
+    const correct = QS[cur].ans;
+
+    const ok = idx === correct;
+
+    lockAll();
+
+    markCorrect();
+
+    if(!ok){
+        btn.classList.add('wrong');
+    }
+
+    if(ok){
+
+        score += 100;
+
+        g('scnum').textContent = score;
+    }
+
+    showExpl();
+}
+
+function lockAll(){
+
+    document
+    .querySelectorAll('.opt')
+    .forEach(b=>b.classList.add('locked'));
+}
+
+function markCorrect(){
+    document
+    .querySelectorAll('.opt')
+    [QS[cur].ans]
+    .classList.add('correct');
+}
+
+/* EXPLANATION */
+
+function showExpl(){
+
+    g('expl').innerHTML =
+    '✅ '+QS[cur].expl;
+
+    g('expl').classList.add('on');
+
+    g('btn-next').classList.add('on');
+}
+
+/* NEXT */
+
+function nextQ(){
+
+    cur++;
+
+    if(cur >= QS.length){
+
+        showResult();
+
+    }else{
+
+        loadQ();
+    }
+}
+
+/* RESULT */
+
+function showResult(){
+
+    showScreen('s-result');
+
+    g('rval').textContent = score;
+
+    if(score === 200){
+
+        g('rtrophy').textContent='🏆';
+
+        g('rtitle').textContent='SEMPURNA!';
+
+        g('rmsg').innerHTML=
+        'Semua jawaban benar dalam penanganan kasus komunikasi profesional!';
+
+    }else if(score >= 100){
+
+        g('rtrophy').textContent='🥈';
+
+        g('rtitle').textContent='BAGUS!';
+
+        g('rmsg').innerHTML=
+        'Kamu memahami dasar komunikasi profesional kerja.';
+
+    }else{
+
+        g('rtrophy').textContent='🤪';
+
+        g('rtitle').textContent='yahahah gagal ';
+
+        g('rmsg').innerHTML=
+        'Pelajari lagi etika komunikasi dunia kerja dan coba kembali!';
+    }
+}
+
+/* RESTART */
+
+function restart(){
+
+    cur = 0;
+    score = 0;
+
+    g('scnum').textContent='0';
+
+    showScreen('s-intro');
+}
+
+/* EVENTS */
+
+g('btn-start')
+.addEventListener('click',startCountdown);
+
+g('btn-next')
+.addEventListener('click',nextQ);
+
+g('btn-replay')
+.addEventListener('click',restart);
+
+</script>
+
+</body>
+</html>

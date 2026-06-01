@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+.video-bg {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;    
+    height: 100vh;   
+    object-fit: cover; 
+    z-index: -1;     
+}
+
+.navbar {
+    background-color: #A855F7;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-style: normal;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* --- KUNCI UTAMA DI SINI --- */
+/* Kita ubah .wrapper menjadi area Flexbox untuk memeluk container 1 dan 2 */
+.wrapper-content {
+    display: flex;
+    justify-content: center; /* Membuat kedua kotak berada di tengah halaman */
+    align-items: flex-start; /* Mengunci bagian atas kedua kotak agar setara/sejajar lurus */
+    gap: 30px;               /* Memberikan jarak renggang di antara kedua kotak */
+    margin-top: 50px;        /* Jarak antara navbar dengan kotak materi */
+}
+
+.container {
+    padding: 40px; /* Sedikit dikecilkan agar teks panjangmu tidak terlalu sesak */
+    box-shadow: 0 0 30px #010101;
+    border-radius: 15px;
+    width: 350px;  /* Sedikit diperlebar menjadi 350px supaya teks EAP terbaca rapi */
+    height: 350px; /* Disesuaikan tingginya agar muat penjelasannya */
+    backdrop-filter: blur(12px);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-y: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transisi efek membesar */
+}
+
+/* Efek interaktif hover & active untuk kedua container */
+.container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+}
+
+.container:active {
+    transform: scale(1.05);
+}
+
+/* Reset margin bawaan tag judul di dalam container agar merapat ke atas */
+.container h2, .container2 h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.container h4, .container2 h4 {
+    margin-top: 0;
+    font-weight: normal;
+    line-height: 1.6; /* Membuat jarak antar baris teks lebih nyaman dibaca */
+}
+.menu-game {
+    border: 1px solid rgba(0, 245, 255, 0.4); /* Garis kotak tipis warna cyan */
+    padding: 6px 12px;                        /* Jarak teks ke garis (atas-bawah, kiri-kanan) */
+    border-radius: 8px;                       /* Membuat sudut kotak agak bulat */
+    background: rgba(0, 245, 255, 0.05);      /* Warna latar tipis di dalam kotak */
+    transition: 0.3s;
+}
+
+/* Efek saat kursor menyentuh kotak */
+.menu-game:hover {
+    background: rgba(0, 245, 255, 0.2);
+    border-color: #00f5ff;
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+}
+</style>
+<body>
+    
+    <div>
+        <nav class="navbar">
+            <div><h1 style="color: white; margin: 0;">English for Academic Purposes</h1></div>
+            <ul>
+                <li>
+                    <a href="game3.html" class="menu-game" style="color: white;">🎮 Main Game</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- KEDUA CONTAINER DIBUNGKUS DI SINI AGAR BISA SEJAJAR KE SAMPING -->
+    <div class="wrapper-content">
+        
+        <!-- CONTAINER 1: PENGERTIAN -->
+        <div class="container">
+            <h2 style="color: aliceblue;">WHAT IS PS?</h2>
+            <h4 style="color: rgb(0, 255, 30);">
+                Public Speaking  is the skill of structuring and delivering a clear, engaging, and impactful oral presentation to an audience, focusing on confidence, body language, and effective communication.
+            </h4>
+        </div>
+        <!-- CONTAINER 2: ATURAN KUNCI -->
+<div class="container">
+    <div class="wrapper">
+        <h2 style="color: white;">Core Rules of PS</h2>
+        <p class="intro-text" style="color: rgb(0, 255, 30)">The Rules of Public Speaking</p>
+        
+        <ul class="rules-list" style="color: rgb(0, 255, 30);">
+            <li>
+                <strong>1. The 30-Second Hook</strong>
+                <p>Capture attention instantly at the start with a question, story, or shocking fact.</p>
+            </li>
+            <li>
+                <strong>2. The 10-20-30 Slide Rule</strong>
+                <p>Maximum 10 slides, maximum 20 minutes, and minimum 30pt font size.</p>
+            </li>
+            <li>
+                <strong>3. Audience-Centric Tone</strong>
+                <p>Adapt your language and topic to match the listeners' background.</p>
+            </li>
+            <li>
+                <strong>4. 3-Second Eye Contact</strong>
+                <p>Look at individual audience members for 3 seconds to build a real connection.</p>
+            </li>
+            <li>
+                <strong>5.Vocal & Physical Variety</strong>
+                <p>Use deliberate hand gestures, open posture, and change your tone/pitch to avoid sounding robotic</p>
+            </li>
+            <li>
+                <strong>Direct Q&A Method</strong>
+                <p>State your answer directly first, then back it up with a brief explanation.</p>
+            </li>
+        </ul>
+    </div>
+</div>
+    <!-- VIDEO BACKGROUND -->
+    <video autoplay muted loop class="video-bg">
+        <source src="WhatsApp Video 2026-05-24 at 13.43.46.mp4">
+    </video>
+
+</body>
+</html>
+</body>
+</html>
